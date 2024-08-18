@@ -17,5 +17,10 @@ app.post('/aaa', upload.single('aaa'), function (req, res, next) {
 app.post('/bbb', upload.array('bbb', 2), function (req, res, next) {
   console.log('req.file', req.files)
   console.log('req.body', req.body)
+}, function (err, req, res, next) {
+  // 超过俩文件报错处理
+  if (err instanceof MulterError && err.code === 'LIMIT_UNEXPECTED_FILE') {
+    res.status(400).end('Too many files uploaded');
+  }
 })
 app.listen(3333)
