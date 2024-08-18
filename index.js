@@ -13,5 +13,9 @@ app.post('/aaa', upload.single('aaa'), function (req, res, next) {
   console.log('req.file', req.file)
   console.log('req.body', req.body)
 })
-
+// 多文件传输
+app.post('/bbb', upload.array('bbb', 2), function (req, res, next) {
+  console.log('req.file', req.files)
+  console.log('req.body', req.body)
+})
 app.listen(3333)
